@@ -51,7 +51,6 @@ export default function BlindDateUnlockScreen() {
     referralsCount,
     startCountdown,
     shareOnWhatsApp,
-    simulateFriendClick,
     checkAutoUnlock,
     getRemainingMs,
     formatCountdown,
@@ -64,7 +63,6 @@ export default function BlindDateUnlockScreen() {
   // Live countdown state
   const [remainingMs, setRemainingMs] = useState(getRemainingMs());
   const [copied, setCopied] = useState(false);
-  const [testingClick, setTestingClick] = useState(false);
 
   // Animations
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -153,20 +151,6 @@ export default function BlindDateUnlockScreen() {
   // WhatsApp Share Trigger
   const handleShare = async () => {
     await shareOnWhatsApp(user?.id);
-  };
-
-  // Simulate friend clicking the link (for live test & demo)
-  const handleSimulateClick = async () => {
-    setTestingClick(true);
-    await simulateFriendClick(user?.id);
-    setTimeout(() => {
-      setTestingClick(false);
-      Alert.alert(
-        '🎉 Invite Verified!',
-        'A fellow Ravensbourne student opened your referral link. Blind Date has been instantly unlocked!',
-        [{ text: 'Enter Blind Date 💫', onPress: () => router.replace('/blind-date') }]
-      );
-    }, 700);
   };
 
   // Progress percentage toward 24h (0 to 100%)
@@ -326,18 +310,6 @@ export default function BlindDateUnlockScreen() {
                       onPress={handleShare}
                       style={{ marginTop: 14, width: '100%' }}
                     />
-
-                    {/* Live Simulation / Verification Demo Helper */}
-                    <AnimatedPressable
-                      onPress={handleSimulateClick}
-                      style={styles.simulatePill}
-                      activeScale={0.96}
-                    >
-                      <Zap size={14} color={theme.colors.textSecondary} strokeWidth={2.2} />
-                      <Text style={styles.simulatePillText}>
-                        {testingClick ? 'Verifying link click…' : '🧪 Simulate Friend Opening Link (Test)'}
-                      </Text>
-                    </AnimatedPressable>
                   </View>
                 ) : (
                   // STATE 3: INITIAL STATE -> "⚡ Unlock Instantly — Share on WhatsApp"
@@ -747,21 +719,6 @@ const styles = StyleSheet.create({
     color: theme.colors.textPrimary,
     fontFamily: theme.typography.fontFamily.bold,
     fontSize: 12,
-  },
-
-  simulatePill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-    paddingVertical: 10,
-    marginTop: 10,
-  },
-  simulatePillText: {
-    color: theme.colors.textSecondary,
-    fontFamily: theme.typography.fontFamily.medium,
-    fontSize: 12,
-    textDecorationLine: 'underline',
   },
 
   // Features Explainer
