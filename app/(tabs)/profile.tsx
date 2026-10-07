@@ -82,8 +82,6 @@ export default function ProfileScreen() {
       onPress: () => {
         if (!isEligibleUnlocked) {
           router.push('/blind-date/unlock');
-        } else if (blindDateStatus === 'matched') {
-          router.push('/blind-date/chat');
         } else {
           router.push('/blind-date');
         }
@@ -196,8 +194,6 @@ export default function ProfileScreen() {
               onPress={() => {
                 if (!isEligibleUnlocked) {
                   router.push('/blind-date/unlock');
-                } else if (blindDateStatus === 'matched') {
-                  router.push('/blind-date/chat');
                 } else {
                   router.push('/blind-date');
                 }

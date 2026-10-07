@@ -440,10 +440,18 @@ export default function BlindDateScreen() {
                 variant="primary"
                 size="lg"
                 fullWidth
-                title="Start Exclusive Chat ❤️"
+                title="Message Your Match 💬"
                 icon={<MessageCircle size={18} color={theme.colors.textOnAccent} strokeWidth={2.4} />}
                 onPress={handleStartChat}
               />
+              <AnimatedPressable
+                onPress={dismissMatchingAnimation}
+                style={{ marginTop: 12, paddingVertical: 6, alignItems: 'center' }}
+              >
+                <Text style={{ color: 'rgba(255, 255, 255, 0.75)', fontFamily: theme.typography.fontFamily.medium, fontSize: 13 }}>
+                  View Match Profile First
+                </Text>
+              </AnimatedPressable>
             </View>
           </Animated.View>
         </View>

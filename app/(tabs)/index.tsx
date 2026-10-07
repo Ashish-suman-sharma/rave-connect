@@ -119,8 +119,6 @@ export default function HomeScreen() {
               onPress={() => {
                 if (!isEligibleUnlocked) {
                   router.push('/blind-date/unlock');
-                } else if (blindDateStatus === 'matched') {
-                  router.push('/blind-date/chat');
                 } else {
                   router.push('/blind-date');
                 }
@@ -174,7 +172,7 @@ export default function HomeScreen() {
                     ) : blindDateStatus === 'matched' ? (
                       <View style={styles.matchedBadge}>
                         <View style={styles.matchedPulseDot} />
-                        <Text style={styles.matchedBadgeText}>Matched ❤️</Text>
+                        <Text style={styles.matchedBadgeText}>Connected ❤️</Text>
                       </View>
                     ) : blindDateStatus === 'in_queue' ? (
                       <View style={styles.searchingBadge}>
@@ -192,7 +190,7 @@ export default function HomeScreen() {
                     {!isEligibleUnlocked
                       ? 'Meet someone special today · Anonymous'
                       : blindDateStatus === 'matched' && blindDateMatch
-                      ? `Matched with ${blindDateMatch.partner.codeName} · Tap to chat`
+                      ? `Connected with ${blindDateMatch.partner.codeName} · Tap to view`
                       : blindDateStatus === 'in_queue'
                       ? 'Looking for your match on campus…'
                       : 'Meet someone special today · Anonymous'}
@@ -201,13 +199,7 @@ export default function HomeScreen() {
               </View>
 
               <View style={styles.blindDateRight}>
-                {blindDateStatus === 'matched' ? (
-                  <View style={styles.chatIndicatorCircle}>
-                    <MessageCircle size={15} color="#FFFFFF" strokeWidth={2.4} />
-                  </View>
-                ) : (
-                  <ChevronRight size={20} color="rgba(255, 255, 255, 0.55)" strokeWidth={2.2} />
-                )}
+                <ChevronRight size={20} color="rgba(255, 255, 255, 0.55)" strokeWidth={2.2} />
               </View>
             </AnimatedPressable>
 
